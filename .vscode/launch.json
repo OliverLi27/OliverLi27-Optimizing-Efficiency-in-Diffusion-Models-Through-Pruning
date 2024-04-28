@@ -1,0 +1,65 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "fid_score",
+            "type": "python",
+            "request": "launch",
+            "program": "fid_score.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "run/sample1/image_samples/images/0/","run/fid_stats_cifar10.npz", "--device", "cuda:0", "--batch-size", "256"
+            ]
+        },
+        {
+            "name": "finetune_simple",
+            "type": "python",
+            "request": "launch",
+            "program": "exp_code/finetune_simple.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--config", "cifar10_Finetune100.yml",
+                "--timesteps", "100",
+                "--eta", "0", 
+                "--ni", 
+                "--exp", "run/finetune_simple_v2/cifar10_ours_T=0.05.pth",
+                "--doc", "post_training",
+                "--skip_type", "quad", 
+                "--pruning_ratio", "0.25", 
+                "--use_ema",
+                "--use_pretrained",
+                "--thr","0.05",
+                "--pruner", "ours"
+            ]
+        },
+        {
+            "name": "finetune",
+            "type": "python",
+            "request": "launch",
+            "program": "exp_code/finetune.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--config", "cifar10.yml", 
+                "--exp", "run/sample1",
+                "--sample",
+                "--timesteps", "100",
+                "--eta", "0",
+                "--ni",
+                "--doc", "sample",
+                "--skip_type", "quad",
+                "--pruning_ratio", "0.0",
+                "--fid",
+                "--use_ema",
+                "--restore_from", "run/finetune_simple_v2/cifar10_ours_T=0.05.pth/logs/post_training/ours_pruned_model_0.25.pth",
+                "--load_pruned_model", "run/finetune_simple_v2/cifar10_ours_T=0.05.pth/logs/post_training/ours_pruned_model_0.25.pth"
+
+            ]
+        }
+    ]
+}
