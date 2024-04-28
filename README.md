@@ -12,7 +12,7 @@ This example shows how to prune a DDPM model pre-trained on CIFAR-10 using the [
 ```bash
 cd exp_code
 # Prune & Finetune
-bash scripts/simple_cifar_Ran.sh 0.05 # the pre-trained model and data will be automatically prepared
+bash scripts/simple_cifar_Ran.sh 0.25 # the pre-trained model and data will be automatically prepared
 # Fine-tuning
 bash scripts/sample_cifar_ddpm_pruning.sh run/finetune_simple_v2/cifar10_ours_T=0.05.pth/logs/post_training/ckpt_100000.pth run/sample
 ```
